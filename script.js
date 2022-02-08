@@ -1,12 +1,14 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 var turn = "";
-var projectileX = 0;
-var projectileY = 0;
+var projectileX = 100;
+var projectileY = 500;
 var dx = 2;
 var dy = -2;
 var playerCannonAngle = -45;
+var playerCannonPower = 0;
 var computerCannonAngle = -135;
+var computerCannonPower = 0;
 
 function startGame() {
     turn = "Player";
@@ -26,9 +28,12 @@ function drawGround() {
 
 function drawPlayer() {
     // otsikko
+    var current_angle = playerCannonAngle * -1;
     ctx.font = "16px Arial";
     ctx.fillStyle = "green";
     ctx.fillText("Player", 8, 20);
+    ctx.fillText("Angle: " + current_angle, 8, 40);
+    ctx.fillText("Power: 0%", 8, 60);
     // runko
     ctx.beginPath();
     ctx.rect(25, 550, 50, 25);
@@ -40,7 +45,7 @@ function drawPlayer() {
     ctx.beginPath();
     ctx.translate(50, 550);
     ctx.rotate(playerCannonAngle * Math.PI / 180);
-    ctx.fillStyle = "red";
+    ctx.fillStyle = "green";
     ctx.fillRect(0, 0, 50, 5);
     ctx.closePath();
     ctx.restore();
@@ -48,9 +53,12 @@ function drawPlayer() {
 
 function drawComputer() {
     // otsikko
+    var current_angle = computerCannonAngle + 180;
     ctx.font = "16px Arial";
     ctx.fillStyle = "red";
-    ctx.fillText("Computer", 1120, 20);
+    ctx.fillText("Computer", 1110, 20);
+    ctx.fillText("Angle: " + current_angle, 1110, 40);
+    ctx.fillText("Power: 0%", 1110, 60);
     // runko
     ctx.beginPath();
     ctx.rect(1125, 550, 50, 25);
@@ -60,9 +68,9 @@ function drawComputer() {
     // piippu
     ctx.save();
     ctx.beginPath();
-    ctx.translate(1150, 550);
+    ctx.translate(1150, 555);
     ctx.rotate(computerCannonAngle * Math.PI / 180);
-    ctx.fillStyle = "green";
+    ctx.fillStyle = "red";
     ctx.fillRect(0, 0, 50, 5);
     ctx.closePath();
     ctx.restore();
@@ -70,17 +78,31 @@ function drawComputer() {
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawProjectile(projectileX, projectileY);
-    projectileX += dx;
-    projectileY += dy;
+    drawGround();
+    drawPlayer();
+    drawComputer();
+    if (projectileX < 500) {
+        drawPlayerProjectile(projectileX, projectileY);
+        projectileX += dx;
+        projectileY += dy;
+    }
+    else {
+        clearInterval();
+        projectileX = 100;
+        projectileY = 500;
+    }
+    
+    
 }
 
-function drawProjectile(x, y) {
+function drawPlayerProjectile(x, y) {
     ctx.beginPath();
-    ctx.arc(x, y, 3, 0, Math.PI * 2);
-    ctx.fillStyle = "black";
-    ctx.fill();
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 3;
+    ctx.arc(x, y, 5, 0, Math.PI * 2, true);
+    ctx.stroke();
     ctx.closePath();
 }
-
-// setInterval(draw, 10);
+function shootProjectile() {
+    setInterval(draw, 10);
+}

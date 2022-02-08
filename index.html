@@ -8,6 +8,35 @@
 </head>
 <body onload="startGame()">
     <canvas id="myCanvas" width="1200" height="600"></canvas>
+    <table cellpadding="10" width="100%">
+        <tr>
+            <td align="center">
+                <table cellpadding="10">
+                    <tr>
+                        <td>
+                            <input class="angle_button" type="button" value="Angle (+)" />
+                        </td>
+                        <td>
+                            <input class="angle_button" type="button" value="Angle (-)" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="power_button" type="button" value="Power (+)" />
+                        </td>
+                        <td>
+                            <input class="power_button" type="button" value="Power (-)" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <input class="shoot_button" type="button" value="SHOOT" onclick="shootProjectile()"/>
+            </td>
+        </tr>
+    </table>
     <script type="text/javascript" src="script.js"></script>
 </body>
 </html>

@@ -3,3 +3,26 @@
     display: block;
     margin: 0 auto;
 }
+
+div {
+    text-align: center;
+    padding: 10px;
+}
+
+.angle_button {
+    font-size: 16px;
+    padding: 5px;
+    width: 100px;
+}
+
+.power_button {
+    font-size: 16px;
+    padding: 5px;
+    width: 100px;
+}
+
+.shoot_button {
+    font-size: 16px;
+    padding: 5px;
+    width: 300px;
+}
