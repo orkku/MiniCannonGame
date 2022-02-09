@@ -14,18 +14,18 @@
                 <table cellpadding="10">
                     <tr>
                         <td>
-                            <input class="angle_button" type="button" value="Angle (+)" />
+                            <input id="angle_button1" class="angle_button" type="button" value="Angle (+)" onclick="playerAngle(-1)" />
                         </td>
                         <td>
-                            <input class="angle_button" type="button" value="Angle (-)" />
+                            <input id="angle_button2" class="angle_button" type="button" value="Angle (-)" onclick="playerAngle(1)" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input class="power_button" type="button" value="Power (+)" />
+                            <input id="power_button1" class="power_button" type="button" value="Power (+)" onclick="playerPower(1)" />
                         </td>
                         <td>
-                            <input class="power_button" type="button" value="Power (-)" />
+                            <input id="power_button2"  class="power_button" type="button" value="Power (-)" onclick="playerPower(-1)" />
                         </td>
                     </tr>
                 </table>
@@ -33,7 +33,7 @@
         </tr>
         <tr>
             <td align="center">
-                <input class="shoot_button" type="button" value="SHOOT" onclick="shootProjectile()"/>
+                <input id="shoot_button1" class="shoot_button" type="button" value="SHOOT" onclick="shootProjectile()" />
             </td>
         </tr>
     </table>
