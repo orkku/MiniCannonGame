@@ -8,8 +8,8 @@ var playerCannonPower = 100;
 var computerCannonAngle = -135;
 var computerCannonPower = 100;
 var myInterval;
-var powerX = 100;
-var powerY = 100;
+var powerX = 90;
+var powerY = 0;
 var time = 0;
 
 function startGame() {
@@ -84,10 +84,10 @@ function draw() {
     drawPlayer();
     drawComputer();
     if (turn == "Player") {
-        time += 1;
-        projectileX = 50 + powerX / 100 * time * Math.cos(playerCannonAngle * Math.PI / 180);
-        projectileY = 550 - powerY / 100 * time * Math.cos(playerCannonAngle * Math.PI / 180);
-        if (projectileX < 1200) {
+        time += 0.001;
+        projectileX = 50 + (powerX + playerCannonAngle) * playerCannonPower * time * Math.cosh(playerCannonAngle * Math.PI / 180);
+        projectileY = 550 - (powerY + playerCannonAngle * -1) * playerCannonPower * time * Math.cosh(playerCannonAngle * Math.PI / 180);
+        if (projectileX < 1190) {
             drawPlayerProjectile(projectileX, projectileY);
             powerX += 0.1;
             powerY += -0.1;
@@ -117,7 +117,7 @@ function drawPlayerProjectile(x, y) {
     ctx.beginPath();
     ctx.strokeStyle = "black";
     ctx.lineWidth = 3;
-    ctx.arc(x, y, 3, 0, Math.PI * 2, true);
+    ctx.arc(x, y, 2, 0, Math.PI * 2, true);
     ctx.stroke();
     ctx.closePath();
 }
@@ -155,8 +155,8 @@ function playerAngle(a) {
     if (playerCannonAngle < -90) {
         playerCannonAngle = -90;
     }
-    else if (playerCannonAngle > -10) {
-        playerCannonAngle = -10;
+    else if (playerCannonAngle > 0) {
+        playerCannonAngle = 0;
     }
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawGround();
@@ -175,8 +175,8 @@ function playerPower(p) {
     if (playerCannonPower > 100) {
         playerCannonPower = 100;
     }
-    else if (playerCannonPower < 0) {
-        playerCannonPower = 0;
+    else if (playerCannonPower < 1) {
+        playerCannonPower = 1;
     }
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawGround();
